@@ -1,0 +1,47 @@
+---
+# clouds-public.yaml
+#-------------------------------------------------------------------------------
+# This file would normally go in /etc/openstack/clouds-public.yaml
+# Place common public settings for each cloud here.
+# Refer to these clouds as profiles in ~/.config/openstack/clouds.yaml
+#
+# See https://docs.openstack.org/python-openstackclient/latest/configuration/
+#-------------------------------------------------------------------------------
+
+public-clouds:
+  # overcloud is the production cloud for the masses
+  overcloud:
+    auth_type: password
+    identity_api_version: '3'
+    auth:
+      auth_url: 'https://openstack.example.com:13000/v3'
+    #log_file: /tmp/openstackclient_overcloud.log
+    #log_level: info
+
+  # undercloud is for stack admins only
+  undercloud:
+    auth_type: password
+    identity_api_version: '2'
+    auth:
+      auth_url: 'https://director.example.com:13000/v2.0'
+    #log_file: /tmp/openstackclient_undercloud.log
+    #log_level: info
+
+  # overcloud-test is the test cloud
+  overcloud-test:
+    auth_type: password
+    identity_api_version: '3'
+    auth:
+      auth_url: 'https://openstack-test.example.com:13000/v3'
+    #log_file: /tmp/openstackclient_overcloud-test.log
+    #log_level: info
+
+  # undercloud for stack admins only
+  undercloud-test:
+    auth_type: password
+    identity_api_version: '2'
+    auth:
+      auth_url: 'https://director-test.example.com:13000/v2.0'
+    #log_file: /tmp/openstackclient_undercloud-test.log
+    #log_level: info
+

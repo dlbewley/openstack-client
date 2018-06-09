@@ -1,0 +1,13 @@
+# this is an attempt to remain compatible with Newton
+python-openstackclient==3.8.1
+python-cinderclient==1.11.0
+python-designateclient
+python-glanceclient==2.6.0
+python-keystoneclient==3.10.0
+python-neutronclient==6.1.1
+python-novaclient==7.1.2
+oslo.log
+python-heatclient
+python-ironicclient
+# https://kensavich.com/2017/08/30/installing-and-using-python-shade-in-your-red-hat-openstack-environment/
+shade

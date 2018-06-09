@@ -1,0 +1,20 @@
+---
+# secure.yaml
+# clouds.foo keys here come from clouds.yaml
+clouds:
+  admin:
+    auth:
+      username: admin
+      password: '{{ overcloud_admin_password }}'
+  overcloud:
+    auth:
+      username: '{{ openstack_user }}'
+      password: '{{ openstack_user_password }}'
+  {{ openstack_user }}:
+    auth:
+      username: '{{ openstack_user }}'
+      password: '{{ openstack_user_password }}'
+  undercloud:
+    auth:
+      username: admin
+      password: '{{ undercloud_admin_password }}'

@@ -1,0 +1,54 @@
+---
+# clouds.yaml
+#-------------------------------------------------------------------------------
+# This file will normally go in ~/.config/openstack or CWD
+# The clouds here are what you will refer to on cmd line and env vars.
+# The clouds.foo.profile values correspond to public-clouds.yaml and inherit
+# values like auth_url.
+#
+# Instructions:
+#
+#  1. Unset all OS_* env variables!
+#
+#  2-a. use '--os-cloud=cloud' in cmdline args
+#   OR
+#  2-b. 'export OS_CLOUD=cloud' to make default cloud selection
+#
+#  3. Put your cloud password in secure.yaml or export 'OS_PASSWORD' #
+#
+# See https://docs.openstack.org/python-openstackclient/latest/configuration/
+#-------------------------------------------------------------------------------
+
+clouds:
+  # 
+  admin:
+    profile: overcloud # name from public-clouds.yaml
+    auth:
+      project_name: admin
+      user_domain_name: Default
+      project_domain_name: Default
+  # overcloud as user in own project
+  {{openstack_user}}:
+    profile: overcloud
+    auth:
+      project_name: {{ openstack_user }}-proj
+      user_domain_name: Default
+      project_domain_name: Default
+  # overcloud as user in own project
+  overcloud:
+    profile: overcloud
+    auth:
+      project_name: {{ openstack_user }}-proj
+      user_domain_name: Default
+      project_domain_name: Default
+  # undercloud for stack admins only
+  undercloud:
+    profile: undercloud
+    auth:
+      project_name: admin
+
+# https://github.com/ansible/ansible/blob/devel/contrib/inventory/openstack.py
+#ansible:
+#  use_hostnames: True
+#  expand_hostvars: True
+#  fail_on_errors: True

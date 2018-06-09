@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+virtualenv -p python3 pyenv
+. pyenv/bin/activate
+pip install -r requirements.txt
+
+# don't ignore ssl errors. fix 'em
+python ssl-fix.py
+
+vars=`env | grep ^OS_ | grep -v ^OS_CLOUD`
+if [ -n "$vars" ]; then
+    echo "Consider using unset.sh to remove these variables: $vars"
+fi
+
+echo "Please 'activate' then run 'ansible-playbook client-config.yaml' if you do not have a clouds.yaml"

@@ -1,0 +1,7 @@
+pyenv
+__pycache__
+*.pyc
+*.retry
+*.swp
+*-openrc.sh
+tmp/*

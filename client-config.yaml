@@ -1,0 +1,54 @@
+---
+- hosts: localhost
+  name: Setup my openstack client configuration.
+
+  vars:
+    autocomplete_dir: "~/.bash_completion.d"
+    config_dir: "~/.config/openstack"
+    overcloud_admin_password: "probably not for you"
+    undercloud_admin_password: "not for you"
+
+  tasks:
+    - name:
+      set_fact:
+        openstack_user: "{{lookup('env','USER')}}"
+        openstack_user_password: "secret"
+
+    - name: Create openstack config directory
+      file:
+        dest: "{{ config_dir }}"
+        state: directory
+        recurse: yes
+
+    - name: Install common cloud definitions
+      template:
+        src: templates/config/clouds-public.yaml.j2
+        dest: "{{ config_dir }}/clouds-public.yaml"
+        backup: yes
+
+    - name: Install personal cloud definitions
+      template:
+        src: templates/config/clouds.yaml.j2
+        dest: "{{ config_dir }}/clouds.yaml"
+        backup: yes
+
+    - name: Install personal credentials
+      template:
+        src: templates/config/secure.yaml.j2
+        dest: "{{ config_dir }}/secure.yaml"
+        backup: yes
+
+    - name: Create bash autocomplete directory
+      file:
+        dest: "{{ autocomplete_dir }}"
+        state: directory
+      tags:
+        - shell
+
+    - name: Setup bash autocompletion of openstack commands
+      template:
+        src: templates/osc.j2
+        dest: "{{ autocomplete_dir }}/osc"
+        backup: no
+      tags:
+        - shell
